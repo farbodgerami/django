@@ -18,3 +18,6 @@ services:
       - ./data/db:/var/lib/postgresql/data
     restart: always
     env_file: .env
+
+    # docker-compose exec backend sh -c "pip install pillow" 
+    # docker-compose exec backend sh -c "python manage.py makemigrations blog" 
