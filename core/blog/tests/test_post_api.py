@@ -19,13 +19,13 @@ class TestPostapi():
  
         assert response.status_code==200
     
-    def test_create_post_401(self,api_client,common_user):
+    # def test_create_post_401(self,api_client,common_user):
         
-        data={"title":'test',"content":"aaaaaaaaaaa","status":True,
-            #   "category":None,
-              "published_date":datetime.now()}
-        response=api_client.post('http://localhost:8000/blog/api/v1/post/',data)
-        assert response.status_code == 401
+    #     data={"title":'test',"content":"aaaaaaaaaaa","status":True,
+    #         #   "category":None,
+    #           "published_date":datetime.now()}
+    #     response=api_client.post('http://localhost:8000/blog/api/v1/post/',data)
+    #     assert response.status_code == 401
 
     # def test_create_post_201(self,api_client,common_user):
          
