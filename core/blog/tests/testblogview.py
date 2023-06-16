@@ -9,6 +9,5 @@
 #         response =self.client.get(path='http://localhost:8000/blog/api/v1/post/')
 #         self.assertEqual(response.status_code,200)
 #         print('rrrrrrrrrrrrrrrrrrrrrrrrr',response.content)
-     
-#         self.assertTrue(str(response.content).find("james"))
 
+#         self.assertTrue(str(response.content).find("james"))

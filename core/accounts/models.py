@@ -6,7 +6,9 @@ from django.contrib.auth.models import (
 )
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
+
 # james hetfield
+
 
 class UserManager(BaseUserManager):
     """"""
