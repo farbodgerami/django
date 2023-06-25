@@ -1,0 +1,83 @@
+version: '3.8'
+services: 
+  redis:
+    container_name: redis
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    ports: 
+      - 6379:6379
+    command: redis-server --loglevel warning
+    restart: always
+  
+
+  worker:
+    build: .
+    command: celery -A core worker --loglevel=info
+    env_file: .env
+    volumes:
+      - ./core:/app
+    depends_on:
+      - backend1
+      - redis
+
+  backend1:
+    build: .
+    container_name: backend1
+    command: python manage.py runserver 0.0.0.0:8000
+    # command: python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput gunicorn -w 8 core.wsgi:application --bind 0.0.0.0:8000
+    # command: daphne core.asgi:application --bind 0.0.0.0 -p 8000
+    volumes:
+      - ./core:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+    env_file: .env
+    restart: always
+    depends_on:
+      - redis
+      - db
+
+  # backend2:
+  #   build: .
+  #   container_name: backend2
+  #   # command: gunicorn -w 8 core.wsgi:application --bind 0.0.0.0:8001
+  #   command: daphne core.asgi:application --bind 0.0.0.0 -p 8001
+  #   volumes:
+  #     - ./core:/app
+  #   ports:
+  #     - "8001:8001"
+  #   env_file: .env
+  #   restart: always
+  #   depends_on:
+  #     - db
+
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    restart: always
+    env_file: .env
+ 
+
+ 
+
+ 
+  # master:
+  #   image: locustio/locust
+  #   ports:
+  #    - "8089:8089"
+  #   restart: always
+  #   volumes:
+  #     - ./locust:/mnt/locust
+  #   command: -f /mnt/locust/locustfile.py --master -H http://127.0.0.1:80/
+  
+  # worker:
+  #   image: locustio/locust
+  #   restart: always
+  #   volumes:
+  #     - ./locust:/mnt/locust
+  #   command: -f /mnt/locust/locustfile.py --worker --master-host master
+
+  # docker-compose -f docker-compose-stage.yml up --build -d 

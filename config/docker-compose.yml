@@ -1,0 +1,27 @@
+version: '3.8'
+# for server
+# version: '3.3'
+
+services:
+  nginx:
+    restart: always
+    container_name: nginx
+    build: .
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - leitnervolume:/static
+      - /data:/media
+      - ../logs:/var/log/nginx
+  
+    networks:
+      - nginxnetwork
+
+volumes:
+  leitnervolume:
+    external: true
+
+networks:
+  nginxnetwork:
+    external: true

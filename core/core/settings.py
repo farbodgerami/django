@@ -36,18 +36,22 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # "daphne",
     "django.contrib.staticfiles",
+    "corsheaders",
     "drf_yasg",
     "accounts",
     "blog",
     "rest_framework",
     "django_filters",
     "rest_framework_simplejwt",
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -56,6 +60,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
+CORS_ALLOWED_ORIGINS = [
+   
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
 
 TEMPLATES = [
     {
@@ -154,3 +163,17 @@ REST_FRAMEWORK = {
 SWAGGER_SETTINGS = {
     "VALIDATOR_URL": "http://localhost:8000",
 }
+
+
+CELERY_BROKER_URL= 'redis://redis:6379/1'
+
+ 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+} 

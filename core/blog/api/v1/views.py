@@ -113,7 +113,7 @@ class PostDetail(
     mixins.DestroyModelMixin,
 ):
     serializer_class = PostSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     queryset = Post.objects.all()
     # ya bayad be pk taghir bedim ya lookup field dashte bashim:
     lookup_field = "id"
