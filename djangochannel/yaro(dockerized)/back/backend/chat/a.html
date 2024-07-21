@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="chattext" cols="'80" rows="30"></textarea>
+    <input id="'input" type="text" size="80" />
+    <input id="submit" type="button" value="Send"/>
+    
+</body>
+<script>
+ document.querySelector('#submit').onclick=function(e){
+    const messageinputdom=document.querySelector('#input')
+    const message=messageinputdom.value
+    chatsocket.send(JSON.stringify({
+        'message':message,
+    }))
+    messageinputdom
+ }
+</script>
+</html>

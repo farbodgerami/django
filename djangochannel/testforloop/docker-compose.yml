@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  app:
+    container_name: mysite
+    build:
+      context: ./mysite
+      dockerfile: Dockerfile
+    volumes:
+
+     - /data:/media
+     - ./mysite:/app
+
+    restart: always
+    ports:
+      - "8000:8000"
+ 
+ 
+      
+ 

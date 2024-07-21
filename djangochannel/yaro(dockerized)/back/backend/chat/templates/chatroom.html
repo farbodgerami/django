@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {{roomname}} 
+    <form>
+      <textarea id="chattext" cols="80" rows="30"></textarea><br />
+      <input id="input" type="text" size="80" /><br />
+      <input id="submit" type="button" value="Send" />
+    </form>
+  </body>
+  <script>
+      const roomname={{roomname}}
+   
+      const chatsocket=new WebSocket('ws://'+window.location.host+'/ws/chat/'+roomname+'/')
+        document.querySelector('#submit').onclick=function(e){
+            const messageinputdom=document.querySelector('#input')
+            const message=messageinputdom.value
+            console.log(message)
+            chatsocket.send(JSON.stringify({
+                'message':message,
+ 
+            }))
+            messageinputdom.value=''
+         }
+         chatsocket.onmessage=function(e){
+            const data=JSON.parse(e.data)
+        document.querySelector('#chattext').value+=(data.message+'\n')
+        }
+  </script>
+</html>

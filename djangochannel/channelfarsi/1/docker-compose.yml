@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  app:
+    container_name: chann
+    build:
+      context: ./chann
+      dockerfile: Dockerfile
+    volumes:
+     - /data:/media
+     - ./chann:/app
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - rediscelery
+ 
+  myredis:
+    image: redis 
+    container_name: myredis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - rediscelery
+
+networks:
+  rediscelery:
+    external: true
+  
+ 
+      
+ 

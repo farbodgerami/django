@@ -1,0 +1,69 @@
+version: '3.8'
+services:
+  app:
+    container_name: backend1
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+     - leitnervolume:/static
+     - /data:/media
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - postgresnetwork
+      - nginxnetwork  
+    env_file: .env   
+  redis:
+    image: redis
+    container_name: redis
+    command: redis-server
+    ports:
+      - '6379:6379'
+    networks:
+      - postgresnetwork
+    # depends_on:
+    #   - apppostgresql
+      
+  # apppostgresql:
+  #   image: postgres:14 
+  #   container_name: apppostgresql
+  #   volumes:
+  #     - apppostgres:/var/lib/postgresql/data
+  #   restart: always
+  #   env_file: .env
+  #   ports:
+  #     - "5433:5432"
+  #   networks:
+  #     - postgresnetwork
+
+volumes:
+  apppostgres:
+    external: true
+  leitnervolume:
+    external: true
+ 
+networks:
+  postgresnetwork:
+    external: true
+  nginxnetwork:
+    external: true
+
+
+# vase windows:
+# twisted-iocpsupport==1.0.2
+# Twisted==22.10.0
+
+## channels and redis and django:
+ 
+
+# asgiref==3.6.0
+# async-timeout==4.0.2
+# channels==4.0.0
+# channels-redis==4.0.0
+# Django==4.1.4
+# msgpack==1.0.4
+# redis==4.4.0
+# sqlparse==0.4.3
+# tzdata==2022.7
