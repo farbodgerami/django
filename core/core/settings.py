@@ -70,6 +70,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "templates"],
+        # "DIRS": ['http://127.0.0.1:8000/static/'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -141,22 +142,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = "/static/"
+ 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.User"
+
+
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static"
-MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
 STATICFILES_DIRS = (BASE_DIR / "templates",)
+# adrese routi ke bahash mitoonim file update shode ro bebinim. mersle:
+# http://localhost:8000/mediiia/j.png
+MEDIA_URL = "mediiia/"
+# pooshei ke tashkil mishe va vaghti ma chizi upload mikonim miad too in pooshe
+MEDIA_ROOT = BASE_DIR / "mmedia"
+
+
 REST_FRAMEWORK = {
+    # 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
+          'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 

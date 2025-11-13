@@ -10,7 +10,7 @@ from django.views.generic import TemplateView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-
+from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 
 schema_view = get_schema_view(
@@ -30,6 +30,8 @@ schema_view = get_schema_view(
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
+        # loginlogout in browser
+    path('api-auth/', include('rest_framework.urls')),
         path("blog/", include("blog.urls"), name="blog"),
         path("accounts/", include("accounts.urls"), name="accounts"),
         path("api-docs/", include_docs_urls(title="api-sample")),

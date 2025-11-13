@@ -5,10 +5,12 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.contrib.auth.models import AbstractUser
-from django.utils.translation import ugettext_lazy as _
+# in doroste:
+from django.utils.translation import gettext_lazy as _
 
-# james hetfield
 
+
+# search: django custom user mode;
 
 class UserManager(BaseUserManager):
     """"""

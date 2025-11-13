@@ -11,6 +11,8 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     content = models.TextField()
     status = models.BooleanField()
+    
+    # vase inke age category delete shod post pak nashe
     category = models.ForeignKey("Category", on_delete=models.SET_NULL, null=True)
     image = models.ImageField(null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

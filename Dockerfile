@@ -1,5 +1,5 @@
  
-FROM python:3.8-slim-buster
+FROM python:3.10.15-slim-bullseye
 RUN pip install pip --upgrade 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -20,3 +20,17 @@ COPY ./core /app/
 # vase app jadid docker-compose exec backend sh -c "python manage.py startapp blog"
 
 # docker-compose exec backend sh -c "flake8 && pytest ."
+
+
+
+
+
+
+
+
+ 
+# CMD ["gunicorn", "backend.wsgi:application","--bind","0.0.0.0:8000"]
+# CMD ["daphne", "backend.routing:application","-b","0.0.0.0","-p","8000"]
+
+
+#  gunicorn backend.wsgi:application --bind 0.0.0.0:7000

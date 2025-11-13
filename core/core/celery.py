@@ -18,8 +18,10 @@ app.autodiscover_tasks()
 
 from blog.tasks import sendemail
 
-# @app.on_after_configure.connect
-# def setup_periodic_tasks(sender, **kwargs):
-#     sender.add_periodic_task(10.0, sendemail.s() , name='send email every 10 sec')
+@app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    sender.add_periodic_task(10.0, sendemail.s() , name='send email every 10 sec')
 
 # docker-compose exec backend1 sh -c "celery -A core beat --loglevel=info"
+
+# celery-beat va django-celery-beat dar har do bayad nasb beshan vase jadvale task ha. dar installed apps ham ezafe beshe

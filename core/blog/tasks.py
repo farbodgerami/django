@@ -6,7 +6,10 @@ from time import sleep
 def sendemail():
  
     sleep(3)
-    print("sdrfg")
+    for i in range(100):
+        print(i)
+    print('a')
+    print("Sending Mail")
 
 # ino mizarim too dockercompose
 # docker-compose exec backend1 sh -c "celery -A core worker --loglevel=info"

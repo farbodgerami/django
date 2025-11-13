@@ -6,6 +6,8 @@ import requests
 import json
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 # Create your views here.
 def indexView(request):
     return render(request, "index.html")
@@ -27,3 +29,8 @@ def test(request):
     return HttpResponse(response)
 
 # https://d6d22a6c-3cd5-4678-8d08-7892777ba0f0.mock.pstmn.io/test/delay/5/"
+@api_view()
+def api_post_listview(request):
+    # return HttpResponse("ok")
+    # return Response("ok")
+    return Response({"name":"ok"})
