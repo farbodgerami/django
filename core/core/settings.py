@@ -175,7 +175,7 @@ SWAGGER_SETTINGS = {
     "VALIDATOR_URL": "http://localhost:8000",
 }
 
-
+# related celery url
 CELERY_BROKER_URL= 'redis://redis:6379/1'
 
  
@@ -188,3 +188,5 @@ CACHES = {
         }
     }
 } 
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'

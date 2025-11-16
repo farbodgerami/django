@@ -14,11 +14,14 @@ django-storages
 boto3
 load_dotenv
 django-redis
-django-rest-swagger
-drf-yasg[validation]
 python-freeDictionaryAPI
 httpx
 django-filter
 django-celery-beat
 markdown 
 coreapi
+# swagger:
+django-rest-swagger
+drf-yasg[validation]
+pytest
+ 

@@ -247,24 +247,22 @@ class PostViewSet(viewsets.ViewSet):
         pass
 
 class PostViewSet(viewsets.ModelViewSet):
-
-
+    queryset=Post.objects.all()
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['category', 'author','status',]
-    # vase vaghti ke masalan mikhaim begim ab=x&ab=y.. masalan: category__in=1,2...
+    search_fields = ["title", "content"]
+    ordering_fields = ["published_date"]
+    pagination_class = MyPaginationClass
+
  
-    # filterset_fields = {
-    #     "category": ["exact", "in"],
-    #     "author": ["exact"],
-    #     "status": ["exact"],
-    # }
-    # search_fields = ["title", "content"]
-    # ordering_fields = ["published_date"]
-    # pagination_class = LargeResultsSetPagination
+    filterset_fields = {
+        "category": ["exact", "in"],#category_in=&category=
+        "author": ["exact"],
+        "status": ["exact"],
+    }
     
     
     serializer_class=PostSerializer
-    queryset=Post.objects.all()
     permission_classes = (IsAuthenticated, )
     # filter_backends=[DjangoFilterBackend]
     # filterset_fields = ['category', 'author','status',]
