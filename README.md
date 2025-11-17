@@ -1,2 +1,2 @@
-# djangoadvanced
+# django
  farsi
